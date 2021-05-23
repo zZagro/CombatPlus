@@ -1,0 +1,7 @@
+name: CombatPlus
+version: ${project.version}
+main: eu.zzagro.combatplus.CombatPlus
+commands:
+  aote:
+  reforge:
+

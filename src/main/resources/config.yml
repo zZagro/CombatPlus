@@ -1,0 +1,6 @@
+Prefix: "&3CombatPlus &7>>"
+NoPermission: "&aYou don't have the permission to du that!"
+ReforgeCommand: true
+Permissions:
+  Aote: 'combatplus.aote'
+  Reforge: 'combatplus.reforge'
