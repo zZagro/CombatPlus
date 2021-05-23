@@ -1,16 +1,10 @@
 package eu.zzagro.combatplus.utils;
 
 import eu.zzagro.combatplus.CombatPlus;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.ArrayList;
 
 public class RecipeManager {
 
@@ -32,5 +26,18 @@ public class RecipeManager {
         reforgeAnvilRecipe.setIngredient('a', Material.ANVIL);
 
         return reforgeAnvilRecipe;
+    }
+
+    public Recipe aoteRecipe() {
+        ItemStack aote = plugin.metaManager.aoteItem;
+        aote.setItemMeta(plugin.metaManager.getAoteMeta());
+
+        ShapedRecipe aoteRecipe = new ShapedRecipe(aote);
+
+        aoteRecipe.shape(" e ", " e ", " d ");
+        aoteRecipe.setIngredient('e', Material.ENDER_PEARL);
+        aoteRecipe.setIngredient('d', Material.DIAMOND_SWORD);
+
+        return aoteRecipe;
     }
 }

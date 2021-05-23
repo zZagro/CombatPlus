@@ -4,6 +4,8 @@ import eu.zzagro.combatplus.commands.AoteCmd;
 import eu.zzagro.combatplus.commands.ReforgeCmd;
 import eu.zzagro.combatplus.commands.ViewRecipeCmd;
 import eu.zzagro.combatplus.listeners.*;
+import eu.zzagro.combatplus.stats.Defense;
+import eu.zzagro.combatplus.stats.Health;
 import eu.zzagro.combatplus.stats.Mana;
 import eu.zzagro.combatplus.utils.*;
 import org.bukkit.ChatColor;
@@ -20,8 +22,11 @@ public final class CombatPlus extends JavaPlugin {
     public ReforgeInv reforgeInv = new ReforgeInv(this);
     public RecipeManager recipeManager = new RecipeManager(this);
     public EnchantmentInv eInv = new EnchantmentInv(this);
-    public Mana mana = new Mana(this);
     public ActionBar actionBar = new ActionBar(this);
+
+    public Mana mana = new Mana(this);
+    public Health health = new Health(this);
+    public Defense defense = new Defense(this);
 
     @Override
     public void onEnable() {
@@ -37,6 +42,7 @@ public final class CombatPlus extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ViewRecipeCmd(this), this);
 
         getServer().addRecipe(recipeManager.reforgeAnvilRecipe());
+        getServer().addRecipe(recipeManager.aoteRecipe());
 
         createConfig();
     }

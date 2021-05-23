@@ -1,11 +1,10 @@
 package eu.zzagro.combatplus.stats;
 
-import de.ancash.yaml.configuration.file.YamlFile;
 import eu.zzagro.combatplus.CombatPlus;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -17,6 +16,7 @@ public class Mana {
         this.plugin = plugin;
     }
 
+    public ArrayList<UUID> manaRecoverList = new ArrayList<>();
     public HashMap<UUID, Integer> manaMap = new HashMap<>();
     public HashMap<UUID, Integer> maxManaMap = new HashMap<>();
 
@@ -38,24 +38,30 @@ public class Mana {
     }
 
     public void recoverMana(Player player) {
+        int maxMana = getMaxMana(player);
+        final int[] currentMana = {getCurrentMana(player)};
         int recover = (int) (getMaxMana(player) * (5.0f/100.0f));
-        Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, new Runnable() {
-            int currentMana = getCurrentMana(player);
-            int maxMana = getMaxMana(player);
+        manaRecoverList.add(player.getUniqueId());
 
+        Bukkit.getScheduler().runTaskTimer(plugin, new Runnable() {
             @Override
             public void run() {
-                if (currentMana >= maxMana) {
-                    currentMana = maxMana;
-                } else {
-                    do {
-                        setCurrentMana(player, currentMana + recover);
-                    } while (currentMana < maxMana);
-                    if (currentMana > maxMana) {
-                        currentMana = maxMana;
+                if (currentMana[0] < maxMana) {
+                    currentMana[0] = getCurrentMana(player) + recover;
+                    setCurrentMana(player, currentMana[0]);
+                    if (currentMana[0] > maxMana) {
+                        setCurrentMana(player, maxMana);
+                        manaRecoverList.remove(player.getUniqueId());
+
+                    } else if (currentMana[0] == maxMana) {
+                        manaRecoverList.remove(player.getUniqueId());
                     }
                 }
             }
-        }, 20, 1);
+        }, 20, 20);
+
+        if (currentMana[0] > maxMana) {
+            setCurrentMana(player, maxMana);
+        }
     }
 }

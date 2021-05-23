@@ -36,11 +36,7 @@ public class ViewRecipeCmd implements CommandExecutor, Listener {
                         player.sendMessage(plugin.prefix + plugin.color("&cInvalid format!\n&cUsage: /viewrecipe <ITEM>"));
                     } else {
                         if (args[0].equalsIgnoreCase("ASPECT_OF_THE_END")) {
-                            inv.getName().replace(ChatColor.DARK_GRAY + "Item", ChatColor.DARK_GRAY + "Aspect of the End");
-                            ItemStack aote = plugin.metaManager.aoteItem;
-                            aote.setItemMeta(plugin.metaManager.getAoteMeta());
-                            inv.setItem(9, aote);
-                            player.openInventory(inv);
+                            aoteRecipeInv(player);
                         } else if (args[0].equalsIgnoreCase("REFORGE_ANVIL")) {
                             reforgeAnvilRecipeInv(player);
                         }
@@ -88,11 +84,49 @@ public class ViewRecipeCmd implements CommandExecutor, Listener {
         player.openInventory(inv);
     }
 
+    public void aoteRecipeInv(Player player) {
+        inv = Bukkit.createInventory(player, 54, ChatColor.DARK_GRAY + "Aspect of the End Recipe");
+
+        ItemStack empty = plugin.metaManager.empty;
+        empty.setItemMeta(plugin.metaManager.getEmptyMeta());
+        for (int i = 0; i < inv.getSize(); i++) {
+            inv.setItem(i, empty);
+        }
+
+        ItemStack close = plugin.metaManager.barrier;
+        close.setItemMeta(plugin.metaManager.getBarrierMeta());
+        inv.setItem(49, close);
+
+        ItemStack craftingTable = plugin.metaManager.craftingTable;
+        craftingTable.setItemMeta(plugin.metaManager.getCraftingTableMeta());
+        inv.setItem(23, craftingTable);
+
+        ItemStack air = new ItemStack(Material.AIR);
+        inv.setItem(10, air);
+        inv.setItem(12, air);
+        inv.setItem(19, air);
+        inv.setItem(21, air);
+        inv.setItem(28, air);
+        inv.setItem(30, air);
+
+        ItemStack aote = plugin.metaManager.aoteItem;
+        aote.setItemMeta(plugin.metaManager.getAoteMeta());
+        ItemStack ep = new ItemStack(Material.ENDER_PEARL);
+        ItemStack ds = new ItemStack(Material.DIAMOND_SWORD);
+        inv.setItem(11, ep);
+        inv.setItem(20, ep);
+        inv.setItem(29, ds);
+
+        inv.setItem(25, aote);
+
+        player.openInventory(inv);
+    }
+
     @EventHandler
     public void onClick(InventoryClickEvent e) {
         Player player = (Player) e.getWhoClicked();
 
-        if (e.getInventory().getName().equalsIgnoreCase(ChatColor.DARK_GRAY + "Reforge Anvil Recipe")) {
+        if (e.getInventory().getName().equalsIgnoreCase(ChatColor.DARK_GRAY + "Reforge Anvil Recipe") || e.getInventory().getName().equalsIgnoreCase(ChatColor.DARK_GRAY + "Aspect of the End Recipe")) {
             e.setCancelled(true);
             if (e.getCurrentItem().getType() == Material.BARRIER) {
                 player.closeInventory();

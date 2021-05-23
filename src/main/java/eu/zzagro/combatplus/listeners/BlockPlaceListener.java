@@ -16,7 +16,7 @@ public class BlockPlaceListener implements Listener {
         if (e.getItemInHand().getType() == Material.ANVIL) {
             if (e.getItemInHand() != null) {
                 if (e.getItemInHand().hasItemMeta()) {
-                    if (e.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.YELLOW + "Reforge Anvil")) {
+                    if (e.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.DARK_PURPLE + "Reforge Anvil")) {
                         e.setCancelled(true);
                     }
                 }
