@@ -4,4 +4,6 @@ main: eu.zzagro.combatplus.CombatPlus
 commands:
   aote:
   reforge:
+  viewrecipe:
+
 

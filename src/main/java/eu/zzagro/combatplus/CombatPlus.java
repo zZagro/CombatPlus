@@ -2,6 +2,7 @@ package eu.zzagro.combatplus;
 
 import eu.zzagro.combatplus.commands.AoteCmd;
 import eu.zzagro.combatplus.commands.ReforgeCmd;
+import eu.zzagro.combatplus.commands.ViewRecipeCmd;
 import eu.zzagro.combatplus.listeners.*;
 import eu.zzagro.combatplus.stats.Mana;
 import eu.zzagro.combatplus.utils.*;
@@ -26,12 +27,14 @@ public final class CombatPlus extends JavaPlugin {
     public void onEnable() {
         getCommand("aote").setExecutor(new AoteCmd(this));
         getCommand("reforge").setExecutor(new ReforgeCmd(this));
+        getCommand("viewrecipe").setExecutor(new ViewRecipeCmd(this));
 
         getServer().getPluginManager().registerEvents(new PlayerInteractListener(this), this);
         getServer().getPluginManager().registerEvents(new InvClickListener(this), this);
         getServer().getPluginManager().registerEvents(new BlockPlaceListener(), this);
         getServer().getPluginManager().registerEvents(new EnchantmentListener(this), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
+        getServer().getPluginManager().registerEvents(new ViewRecipeCmd(this), this);
 
         getServer().addRecipe(recipeManager.reforgeAnvilRecipe());
 

@@ -45,10 +45,8 @@ public class EnchantmentInv {
         enchantmentTable.setItemMeta(tableMeta);
         enchTable.setItem(28, enchantmentTable);
 
-        ItemStack barrier = new ItemStack(Material.BARRIER, 1);
-        ItemMeta barrierMeta = barrier.getItemMeta();
-        barrierMeta.setDisplayName(ChatColor.RED + "Close");
-        barrier.setItemMeta(barrierMeta);
+        ItemStack barrier = plugin.metaManager.barrier;
+        barrier.setItemMeta(plugin.metaManager.getBarrierMeta());
         enchTable.setItem(49, barrier);
 
         ItemStack grayDye = new ItemStack(Material.INK_SACK, 1, (short) 8);

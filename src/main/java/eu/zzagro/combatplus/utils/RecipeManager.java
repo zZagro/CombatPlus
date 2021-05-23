@@ -22,17 +22,8 @@ public class RecipeManager {
 
     public Recipe reforgeAnvilRecipe() {
 
-        ArrayList<String> lore = new ArrayList<>();
-        lore.add(plugin.color("&7Right click to open the"));
-        lore.add(plugin.color("&7Reforge Anvil"));
-
-        ItemStack reforgeAnvil = new ItemStack(Material.ANVIL);
-        ItemMeta reforgeAnvilMeta = reforgeAnvil.getItemMeta();
-        reforgeAnvilMeta.setDisplayName(ChatColor.YELLOW + "Reforge Anvil");
-        reforgeAnvilMeta.addEnchant(Enchantment.DURABILITY, 0, true);
-        reforgeAnvilMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        reforgeAnvilMeta.setLore(lore);
-        reforgeAnvil.setItemMeta(reforgeAnvilMeta);
+        ItemStack reforgeAnvil = plugin.metaManager.reforgeAnvil;
+        reforgeAnvil.setItemMeta(plugin.metaManager.getReforgeAnvilMeta());
 
         ShapedRecipe reforgeAnvilRecipe = new ShapedRecipe(reforgeAnvil);
 

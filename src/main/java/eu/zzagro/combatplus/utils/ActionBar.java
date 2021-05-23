@@ -19,13 +19,13 @@ public class ActionBar {
     }
 
     public void sendActionbarMessage(Player player, String text) {
-        new Timer(player.getUniqueId().toString()).schedule(new TimerTask() {
+        Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, new Runnable() {
             @Override
             public void run() {
                 PacketPlayOutChat packet = new PacketPlayOutChat(IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + text + "\"}"), (byte) 2);
                 ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
-                if (Bukkit.getPlayer(player.getUniqueId()) != null) this.cancel();
+                //if (Bukkit.getPlayer(player.getUniqueId()) != null) this.cancel();
             }
-        }, 20, 20);
+        }, 5, 20);
     }
 }
