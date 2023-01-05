@@ -5,3 +5,6 @@ Permissions:
   Aote: 'combatplus.aote'
   Reforge: 'combatplus.reforge'
   Viewrecipe: 'combatplus.viewrecipe'
+  SetMaxMana: 'combatplus.setmaxmana'
+  SetMana: 'combatplus.setmana'
+  CombatPlus: 'combatplus.combatplus'

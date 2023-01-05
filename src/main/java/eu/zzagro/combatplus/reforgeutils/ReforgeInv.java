@@ -1,4 +1,4 @@
-package eu.zzagro.combatplus.utils;
+package eu.zzagro.combatplus.reforgeutils;
 
 import eu.zzagro.combatplus.CombatPlus;
 import org.bukkit.Bukkit;

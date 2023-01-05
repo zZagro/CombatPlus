@@ -3,6 +3,7 @@ package eu.zzagro.combatplus.stats;
 import eu.zzagro.combatplus.CombatPlus;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,7 +22,6 @@ public class Mana {
     public HashMap<UUID, Integer> maxManaMap = new HashMap<>();
 
     public void setMaxMana(Player player, int amount) {
-        manaMap.put(player.getUniqueId(), amount);
         maxManaMap.put(player.getUniqueId(), amount);
     }
 
@@ -52,7 +52,6 @@ public class Mana {
                     if (currentMana[0] > maxMana) {
                         setCurrentMana(player, maxMana);
                         manaRecoverList.remove(player.getUniqueId());
-
                     } else if (currentMana[0] == maxMana) {
                         manaRecoverList.remove(player.getUniqueId());
                     }

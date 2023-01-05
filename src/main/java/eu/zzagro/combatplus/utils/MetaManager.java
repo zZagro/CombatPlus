@@ -51,6 +51,7 @@ public class MetaManager {
             aoteLore.add(plugin.color("&8This item can be reforged!"));
             aoteLore.add(plugin.color("&9&lRARE SWORD"));
             aoteMeta.setLore(aoteLore);
+            aoteMeta.spigot().setUnbreakable(true);
             aoteItem.setItemMeta(aoteMeta);
         }
         return aoteMeta;

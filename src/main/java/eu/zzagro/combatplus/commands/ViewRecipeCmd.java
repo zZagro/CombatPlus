@@ -11,10 +11,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 public class ViewRecipeCmd implements CommandExecutor, Listener {
 
@@ -64,11 +62,12 @@ public class ViewRecipeCmd implements CommandExecutor, Listener {
         craftingTable.setItemMeta(plugin.metaManager.getCraftingTableMeta());
         inv.setItem(23, craftingTable);
 
+        int[] airSlot = {10, 12, 28, 30};
+
         ItemStack air = new ItemStack(Material.AIR);
-        inv.setItem(10, air);
-        inv.setItem(12, air);
-        inv.setItem(28, air);
-        inv.setItem(30, air);
+        for (int i = 0; i < airSlot.length; i++) {
+            inv.setItem(i, air);
+        }
 
         ItemStack reforgeAnvil = plugin.metaManager.reforgeAnvil;
         reforgeAnvil.setItemMeta(plugin.metaManager.getReforgeAnvilMeta());
@@ -101,13 +100,12 @@ public class ViewRecipeCmd implements CommandExecutor, Listener {
         craftingTable.setItemMeta(plugin.metaManager.getCraftingTableMeta());
         inv.setItem(23, craftingTable);
 
+        int[] airSlot = {10, 12, 19, 21, 28, 30};
+
         ItemStack air = new ItemStack(Material.AIR);
-        inv.setItem(10, air);
-        inv.setItem(12, air);
-        inv.setItem(19, air);
-        inv.setItem(21, air);
-        inv.setItem(28, air);
-        inv.setItem(30, air);
+        for (int i = 0; i < airSlot.length; i++) {
+            inv.setItem(i, air);
+        }
 
         ItemStack aote = plugin.metaManager.aoteItem;
         aote.setItemMeta(plugin.metaManager.getAoteMeta());
@@ -126,6 +124,9 @@ public class ViewRecipeCmd implements CommandExecutor, Listener {
     public void onClick(InventoryClickEvent e) {
         Player player = (Player) e.getWhoClicked();
 
+        if (e.getInventory() == null || e.getCurrentItem() == null) {
+            return;
+        }
         if (e.getInventory().getName().equalsIgnoreCase(ChatColor.DARK_GRAY + "Reforge Anvil Recipe") || e.getInventory().getName().equalsIgnoreCase(ChatColor.DARK_GRAY + "Aspect of the End Recipe")) {
             e.setCancelled(true);
             if (e.getCurrentItem().getType() == Material.BARRIER) {

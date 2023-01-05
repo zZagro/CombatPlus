@@ -1,6 +1,7 @@
 package eu.zzagro.combatplus.listeners;
 
 import eu.zzagro.combatplus.CombatPlus;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -42,6 +43,7 @@ public class EnchantmentListener implements Listener {
             @Override
             public void run() {
                 onClick(e);
+                onInvInteract(e);
             }
         }.runTaskLaterAsynchronously(plugin, 2);
     }
@@ -49,5 +51,14 @@ public class EnchantmentListener implements Listener {
     @EventHandler
     public void onClick(InventoryClickEvent e) {
         Player player = (Player) e.getWhoClicked();
+
+        if (e.getInventory().getTitle().equalsIgnoreCase(ChatColor.BLACK + "Enchant Item")) {
+            if (e.getSlot() != 19 && e.getClickedInventory() != player.getInventory()) {
+                e.setCancelled(true);
+                if (e.getCurrentItem().getType() == Material.BARRIER) {
+                    player.closeInventory();
+                }
+            }
+        }
     }
 }

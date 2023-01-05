@@ -2,11 +2,9 @@ package eu.zzagro.combatplus.stats;
 
 import eu.zzagro.combatplus.CombatPlus;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 
-import java.util.HashMap;
-import java.util.UUID;
-
-public class Defense {
+public class Defense implements Listener {
 
     private final CombatPlus plugin;
 
@@ -14,13 +12,11 @@ public class Defense {
         this.plugin = plugin;
     }
 
-    public HashMap<UUID, Integer> defenseMap = new HashMap<>();
-
-    public void setDefense(Player player, int amount) {
-        defenseMap.put(player.getUniqueId(), amount);
+    public void setDefense(Player player, double amount) {
+        plugin.defenseMap.put(player.getUniqueId(), amount);
     }
 
-    public int getDefense(Player player) {
-        return defenseMap.get(player.getUniqueId());
+    public double getDefense(Player player) {
+        return plugin.defenseMap.get(player.getUniqueId());
     }
 }
